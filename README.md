@@ -11,7 +11,7 @@
 
 ## Forked from 
 
-https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated
+https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated
 
 Refer to his README for up to date instructions on installation and usage
 

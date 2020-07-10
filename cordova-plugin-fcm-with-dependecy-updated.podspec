@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   Extremely easy plug&play push notification plugin for Cordova applications with Google Firebase FCM.
 DESC
 
-  spec.homepage     = "https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated"
+  spec.homepage     = "https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -52,7 +52,7 @@ DESC
   #  profile URL.
   #
 
-  spec.author = { "André Tissot" => "andrehtissot@gmail.com" }
+  spec.author = { "André Tissot" => "binaryops-wiebo@gmail.com" }
   # Or just: spec.author    = ""
   # spec.social_media_url   = "https://twitter.com/"
 
@@ -79,7 +79,7 @@ DESC
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.git", :tag => "v#{spec.version}" }
+  spec.source       = { :git => "https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated.git", :tag => "v#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

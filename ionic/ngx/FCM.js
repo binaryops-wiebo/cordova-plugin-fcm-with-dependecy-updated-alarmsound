@@ -8,9 +8,9 @@ var FCM = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     FCM.pluginName = 'FCM';
-    FCM.plugin = 'cordova-plugin-fcm-with-dependecy-updated';
+    FCM.plugin = 'cordova-plugin-fcm-with-dependecy-updated-alarmsound';
     FCM.pluginRef = 'FCM';
-    FCM.repo = 'https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated';
+    FCM.repo = 'https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated-alarmsound';
     FCM.platforms = ['Android', 'iOS'];
     FCM.installed = IonicNativePlugin.installed;
     FCM.getPlugin = IonicNativePlugin.getPlugin;

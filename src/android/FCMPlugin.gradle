@@ -1,6 +1,6 @@
 def PLUGIN_CONFIG = new Object()
 try {
-    PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated']
+    PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated-alarmsound']
 } catch(Exception e) {}
 def ANDROID_FCM_VERSION = System.getenv('ANDROID_FCM_VERSION') ?: rootProject.hasProperty('ANDROID_FCM_VERSION') ? rootProject.ext.ANDROID_FCM_VERSION : PLUGIN_CONFIG.hasProperty("ANDROID_FCM_VERSION") ? PLUGIN_CONFIG.ANDROID_FCM_VERSION : null ?: '19.0.0'
 
@@ -8,7 +8,7 @@ buildscript {
     ext {
         def PLUGIN_CONFIG = new Object()
         try {
-            PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated']
+            PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated-alarmsound']
         } catch(Exception e) {
             def WARNING_STYLE = "${(char)27}[33;49"+"m"
             def DEFAULT_STYLE = "${(char)27}[39;49"+"m"

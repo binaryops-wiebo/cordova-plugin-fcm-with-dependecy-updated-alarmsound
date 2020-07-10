@@ -1,16 +1,16 @@
 {
     "version": "7.0.3",
-    "name": "cordova-plugin-fcm-with-dependecy-updated",
+    "name": "cordova-plugin-fcm-with-dependecy-updated-alarmsound",
     "cordova_name": "Cordova FCM Push Plugin",
     "description": "Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated",
     "license": "MIT",
     "main": "./FCM.js",
-    "repo": "https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated",
-    "issue": "https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/issues",
+    "repo": "https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated-alarmsound",
+    "issue": "https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated-alarmsound/issues",
     "author": "André Augusto Tissot",
     "repository": {
         "type": "git",
-        "url": "https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated"
+        "url": "https://github.com/binaryops-wiebo/cordova-plugin-fcm-with-dependecy-updated-alarmsound"
     },
     "keywords": [
         "ecosystem:cordova",
