@@ -1,9 +1,14 @@
 package com.gae.scaffolder.plugin;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
+
+import com.binaryops.pnwtsunamialert.R;
 import com.gae.scaffolder.plugin.interfaces.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -73,6 +78,8 @@ public class FCMPlugin extends CordovaPlugin {
         FirebaseMessaging.getInstance().subscribeToTopic("android");
         FirebaseMessaging.getInstance().subscribeToTopic("all");
     }
+
+
 
     public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         Log.d(TAG, "==> FCMPlugin execute: " + action);
