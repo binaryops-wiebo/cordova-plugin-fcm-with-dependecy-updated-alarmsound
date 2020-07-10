@@ -1,4 +1,4 @@
-cd node_modules/cordova-plugin-fcm-with-dependecy-updated/ionic/
+cd node_modules/cordova-plugin-fcm-with-dependecy-updated-alarmsound/ionic/
 npm i
 cd ngx
 npm i
