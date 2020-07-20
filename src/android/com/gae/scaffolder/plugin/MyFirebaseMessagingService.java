@@ -1,20 +1,15 @@
 package com.gae.scaffolder.plugin;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
+import android.content.res.XmlResourceParser;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -25,7 +20,7 @@ import com.binaryops.pnwtsunamialert.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import static com.gae.scaffolder.plugin.FCMPluginActivity.CHANNEL_ID;
+import org.xmlpull.v1.XmlPullParserException;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -74,9 +69,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         
         Log.d(TAG, "\tNotification Data: " + data.toString());
 
-        Intent intent = new Intent(this, AlarmSoundService.class);
-        startService(intent);
-        this.createNotification();
+
+        String soundAlarm = data.get("soundAlarm").toString();
+        if ("true".equalsIgnoreCase(soundAlarm)){
+            Log.d(TAG, "\tStarting Alarm" );
+            Intent intent = new Intent(this, AlarmSoundService.class);
+            startService(intent);
+        } else {
+            Log.d(TAG, "\t Skipping Alarm");
+        }
+
+        this.createNotification(data);
 
         FCMPlugin.sendPushPayload(data);
     }
@@ -88,19 +91,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         return id;
     }
 
-    private void createNotification(){
+    private void createNotification(Map<String, Object> data){
         // Create an explicit intent for an Activity in your app
         Intent notification_intent = new Intent(this, FCMPluginActivity.class);
         notification_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notification_intent, 0);
 
+        String notifTitle = data.get("notificationTitle").toString();
+        String notifShort = data.get("notificationShortText").toString();
+        String notifLong = data.get("notificationLongText").toString();
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        String channelID= this.getChannelID();
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Tsunami Alert")
-                .setContentText("A Tsunami Alert is in effect")
+                .setContentTitle(notifTitle)
+                .setContentText(notifShort)
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("The complete source text here?"))
+                        .bigText(notifLong))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
@@ -110,5 +118,39 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // notificationId is a unique int for each notification that you must define
         int notificationId = createID();
         notificationManager.notify(notificationId, builder.build());
+    }
+
+    private String  getChannelID() {
+
+        String channelID ="alert";
+        String preferenceTag = "preference";
+        Context context = this.getBaseContext();
+
+        int configXmlResourceId = context.getResources().getIdentifier("config", "xml", context.getPackageName());
+        XmlResourceParser xrp =  context.getResources().getXml(configXmlResourceId);
+
+        //
+        // walk the config.xml tree and save all <preference> tags we want
+        //
+        try{
+            xrp.next();
+            while(xrp.getEventType() != XmlResourceParser.END_DOCUMENT){
+                if(preferenceTag.equals(xrp.getName())){
+                    String key = xrp.getAttributeValue(null, "name");
+                    if("alertChannelID".equalsIgnoreCase(key)){
+                        channelID = xrp.getAttributeValue(null, "value");
+                        break;
+                    }
+                }
+                xrp.next();
+            }
+        } catch(XmlPullParserException ex){
+            Log.e(TAG, ex.toString());
+        }  catch(IOException ex){
+            Log.e(TAG, ex.toString());
+        }
+
+        return channelID;
+
     }
 }
